@@ -50,7 +50,7 @@ def process_invites(template_path, excel_path, output_dir):
     for index, row in df.iterrows():
         name = row["Name"]  # Adjust the column name as per your Excel
         mobnum = row["Number"]
-        output_file = f"{output_dir}/invite_{name}_{mobnum}.pdf"
+        output_file = f"{output_dir}/{mobnum}_{name}.pdf"
         add_name_to_pages(template_path, output_file, name, positions)
         print(f"Generated: {output_file}")
 
