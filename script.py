@@ -3,14 +3,18 @@ from PyPDF2 import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.colors import Color
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+
+pdfmetrics.registerFont(TTFont("NotoSansGujarati", "NotoSansGujarati-Medium.ttf"))
 
 def create_temp_pdf(name, x, y, output_path):
     """Creates a temporary PDF with the name at specified coordinates."""
     c = canvas.Canvas(output_path, pagesize=letter)
-    c.setFont("Helvetica-BoldOblique", 14)
+    c.setFont("NotoSansGujarati", 18)
     custom_color = Color(250/255, 128/255, 114/255) # RGB value format, where it takes range from 0 to 1 only.
     c.setFillColor(custom_color)
-    c.drawString(x, y, name)  # Set position (x, y) for the name
+    c.drawString(x, y, name.encode('utf-8').decode('utf-8'))  # Set position (x, y) for the name
     c.save()
 
 def add_name_to_pages(template_path, output_path, name, positions):
@@ -61,6 +65,3 @@ output_directory = "output_invites"
 
 # Process the invitations
 process_invites(template_pdf, excel_file, output_directory)
-
-# TO DO
-# add google fonts, gujarati font style
