@@ -1,5 +1,6 @@
 .DS_Store
+*.xlsx
+*.xls
 output_invites/
 temp_page.pdf
-names.xlsx
 whatsapp_profile/
